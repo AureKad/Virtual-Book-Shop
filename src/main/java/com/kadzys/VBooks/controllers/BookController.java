@@ -18,6 +18,12 @@ public class BookController {
         this.bookService = bookService;
     }
 
+    /**
+     * Creates a Book when a post-request is sent to '/books' as long as the ISBN is contained in the body
+     * and the same ISBN is not already present
+     * @param book Body of the Http-Request
+     * @return Http-Response 201 when successful, Http-Response 403 when not
+     */
     @PostMapping(path = "/books")
     public ResponseEntity<Book> createBook(@RequestBody Book book) {
         if (!bookService.exists(book.getIsbn())) {
